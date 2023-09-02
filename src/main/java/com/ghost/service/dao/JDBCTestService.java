@@ -10,15 +10,19 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.ghost.entity.dto.BoardDto;
 import com.ghost.service.TestService;
 
-@Service
+@Repository
 public class JDBCTestService implements TestService {
 	@Autowired
-	private DataSource dataSource;
+	private final DataSource dataSource;
+
+	public JDBCTestService(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 
 	@Override
 	public List<BoardDto> getList() throws SQLException {

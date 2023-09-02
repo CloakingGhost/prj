@@ -20,10 +20,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserDto user = userDao.getUserByUsername(username);
-		if (user == null)
-			throw new UsernameNotFoundException(username);
-		return user;
+		return userDao.getUserByUsername(username);
+	}
+
+	@Override
+	public int signup(UserDto user) {
+		// TODO Auto-generated method stub
+		return userDao.insertUser(user);
 	}
 
 }

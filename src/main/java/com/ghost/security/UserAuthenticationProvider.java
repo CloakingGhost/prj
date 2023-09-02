@@ -13,13 +13,13 @@ import com.ghost.service.UserService;
 
 @Service
 public class UserAuthenticationProvider implements AuthenticationProvider {
-	private final UserService USER_SERVICE;
-	private final BCryptPasswordEncoder PASSWORD_ENCODER;
+	private final UserService userService;
+	private final BCryptPasswordEncoder encoder;
 
 	@Autowired
-	public UserAuthenticationProvider(UserService userService, BCryptPasswordEncoder passwordEncoder) {
-		this.USER_SERVICE = userService;
-		this.PASSWORD_ENCODER = passwordEncoder;
+	public UserAuthenticationProvider(UserService userService, BCryptPasswordEncoder encoder) {
+		this.userService = userService;
+		this.encoder = encoder;
 	}
 
 	@Override
@@ -27,9 +27,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		String username = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
 
-		UserDto user = (UserDto) USER_SERVICE.loadUserByUsername(username);
+		UserDto user = (UserDto) userService.loadUserByUsername(username);
 
-		if (user != null && PASSWORD_ENCODER.matches(password, user.getPassword())) {
+		if (user != null && encoder.matches(password, user.getPassword())) {
 			return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 		}
 

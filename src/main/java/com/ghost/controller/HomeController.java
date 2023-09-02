@@ -16,18 +16,5 @@ public class HomeController {
 		return "root.index";
 	}
 
-	@GetMapping("login")
-	public String login() {
-		return "root.login";
-	}
 
-	@PostMapping("login")
-	public String getIndex() {
-		return "root.index";
-	}
-
-	@PostMapping("logout")
-	public String logout() {
-		return "root.index";
-	}
 }

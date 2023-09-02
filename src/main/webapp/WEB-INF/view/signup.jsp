@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>Sign Up</h2>
 	<div id="login-form">
-		<form action="/login" method="post">
+		<form action="/signup" method="post">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
 			<div>
@@ -16,6 +17,7 @@
 					name="username" placeholder="Username" required autofocus />
 			</div>
 			<div>
+
 				<label for="password">비밀번호 : </label><input type="password"
 					id="password" name="password" placeholder="Password" required
 					autofocus />
@@ -25,8 +27,6 @@
 			</div>
 		</form>
 	</div>
-	<div id="sign-up">
-		<input type="button" value="Sign Up" onclick="location.href='signup'" />
-	</div>
+	<div>${result }</div>
 </body>
 </html>

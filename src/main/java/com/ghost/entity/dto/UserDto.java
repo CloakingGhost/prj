@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +14,6 @@ public class UserDto implements UserDetails {
 	private int id;
 	private String username;
 	private String password;
-	private String role;
 	private Date entryDate;
 	private Date modifyDate;
 	private List<GrantedAuthority> authorities;
@@ -24,14 +24,6 @@ public class UserDto implements UserDetails {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public Date getEntryDate() {
@@ -76,7 +68,15 @@ public class UserDto implements UserDetails {
 	}
 
 	public void setAuthorities(String authority) {
+		LoggerFactory.getLogger(UserDto.class.getSimpleName()).info(authority);
+		if (authorities == null)
+			authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(authority));
+	}
+
+	public void setAuthorities(List<GrantedAuthority> authorities) {
+		LoggerFactory.getLogger(UserDto.class.getSimpleName()).info(authorities.toString());
+		this.authorities = authorities;
 	}
 
 	@Override
@@ -101,6 +101,12 @@ public class UserDto implements UserDetails {
 	// 계정이 활성화 되었는가?
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDto [id=" + id + ", username=" + username + ", password=" + password + ", entryDate=" + entryDate
+				+ ", modifyDate=" + modifyDate + ", authorities=" + authorities + "]";
 	}
 
 }
