@@ -53,7 +53,6 @@ public class UserDto implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return this.password;
 	}
 
@@ -68,7 +67,6 @@ public class UserDto implements UserDetails {
 	}
 
 	public void setAuthorities(String authority) {
-		LoggerFactory.getLogger(UserDto.class.getSimpleName()).info(authority);
 		if (authorities == null)
 			authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(authority));

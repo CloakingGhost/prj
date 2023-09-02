@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h2>Sign In</h2>
 	<div id="login-form">
 		<form action="/login" method="post">
 			<input type="hidden" name="${_csrf.parameterName}"
@@ -28,5 +29,6 @@
 	<div id="sign-up">
 		<input type="button" value="Sign Up" onclick="location.href='signup'" />
 	</div>
+	<div>${LoginFailMessage }</div>
 </body>
 </html>

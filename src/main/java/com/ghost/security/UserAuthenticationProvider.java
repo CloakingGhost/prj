@@ -1,5 +1,6 @@
 package com.ghost.security;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,9 +29,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 		String password = authentication.getCredentials().toString();
 
 		UserDto user = (UserDto) userService.loadUserByUsername(username);
-
+		LoggerFactory.getLogger(UserAuthenticationProvider.class.getSimpleName()).info(user.toString());
 		if (user != null && encoder.matches(password, user.getPassword())) {
-			return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+			return new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
 		}
 
 		return null;

@@ -83,7 +83,6 @@ public class UserDao {
 	}
 
 	public int insertUser(UserDto user) {
-		logger.info("{}", user);
 		String sql = "insert into user(username, password) values(?, ?)";
 		try {
 			Connection con = dataSource.getConnection();

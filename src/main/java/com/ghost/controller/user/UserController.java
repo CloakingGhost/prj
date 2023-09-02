@@ -21,20 +21,19 @@ public class UserController {
 	private final UserService userService;
 	private final PasswordEncoder encoder;
 
-	@GetMapping("login")
-	public String login() {
-		return "root.login";
-	}
-
 	@Autowired
 	public UserController(PasswordEncoder encoder, UserService userService) {
 		this.encoder = encoder;
 		this.userService = userService;
 	}
 
-	@PostMapping("login")
-	public String getIndex() {
-		return "root.index";
+	@RequestMapping("login")
+	public String login(HttpServletRequest request) {
+		String method = request.getMethod();
+		if (method.equals("GET"))
+			return "root.login";
+		else
+			return "root.index";
 	}
 
 	@PostMapping("logout")
@@ -61,7 +60,7 @@ public class UserController {
 				int result = userService.signup(user);
 				logger.info("result : {}", result);
 			}
-			return "root.signup";
+			return "root.index";
 		} else {
 			return "root.index";
 		}
